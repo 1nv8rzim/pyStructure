@@ -1,28 +1,22 @@
-from typing import Union, Any
+class Node:
+    def __init__(self, value, right, left):
+        self.value = value
+        self.right = right
+        self.left = left
+
+    def __str__(self):
+        return f'Node({self.value}, {self.rest})'
+
+    def __repr__(self):
+        return f'Node({self.value}, {self.rest})'
 
 
 class BTree:
 
-    class Node:
-        def __init__(self, value, right, left):
-            if isinstance(left, Union[Node, None]):
-                raise TypeError(f'{left} is not type of Node or None')
-            if isinstance(right, Union[Node, None]):
-                raise TypeError(f'{right} is not type of Node or None')
-            self.value = value
-            self.right = right
-            self.left = left
-
-        def __str__(self):
-            return f'Node({self.value}, {self.rest})'
-
-        def __repr__(self):
-            return f'Node({self.value}, {self.rest})'
-
     def __init__(self, kind, *args):
         if not isinstance(kind, type):
             raise TypeError(f'{kind} is not of type type')
-        if not (hasattr(kind, '__lt__') and hasattr(kind, '__gt__') and hasattr('__gt__')):
+        if not (hasattr(kind, '__lt__') and hasattr(kind, '__gt__') and hasattr(kind, '__gt__')):
             raise TypeError(f'{kind} cannot be compared')
         self.size = 0
         self.kind = kind
@@ -80,29 +74,35 @@ class BTree:
     def prefix(self):
         return self.prefix_string().strip().split(' ')
 
-    def prefix_string(self, reference=self.root):
-        if reference is None:
-            return ' '
-        else:
-            return str(reference.value) + ' ' + self.prefix_string(self.left) + ' ' + self.prefix_string(self.right)
+    def prefix_string(self):
+        def interior(reference=self.root):
+            if reference is None:
+                return ''
+            else:
+                return str(reference.value) + ' ' + interior(reference.left) + ' ' + interior(reference.right)
+        return interior()
 
     def infix(self):
         return self.infix_string().strip().split(' ')
 
-    def infix_string(self, reference=self.root):
-        if reference is None:
-            return ' '
-        else:
-            return self.infix_string(reference.left) + ' ' + str(reference.value) + ' ' + self.infix_string(reference.right)
+    def infix_string(self):
+        def interior(reference=self.root):
+            if reference is None:
+                return ''
+            else:
+                return interior(reference.left) + ' ' + str(reference.value) + ' ' + interior(reference.right)
+        return interior()
 
     def postfix(self):
         return self.postfix_string().strip().split(' ')
 
-    def postfix_string(self, reference=self.root):
-        if reference is None:
-            return ' '
-        else:
-            return self.postfix_string(reference.left) + ' ' + self.postfix(reference.right) + str(reference.value)
+    def postfix_string(self):
+        def interior(reference=self.root):
+            if reference is None:
+                return ''
+            else:
+                return interior(reference.left) + ' ' + interior(reference.right) + str(reference.value)
+        return interior()
 
     def contains(self, element):
         if not isinstance(element, self.kind):
@@ -122,7 +122,7 @@ class BTree:
         return self.infix_string()
 
     def __repr__(self):
-        return 'BTree({})'.format(self.infix_string()[1:-1] if len(self) > 0 else '')
+        return 'BTree({})'.format(self.infix_string()[1:-1].replace('  ', ', ') if len(self) else '')
 
     def __iter__(self):
         return iter(self.prefix_string())
