@@ -72,7 +72,7 @@ class BTree:
         return reference
 
     def prefix(self):
-        return self.prefix_string().strip().split(' ')
+        return self.prefix_string()
 
     def prefix_string(self):
         def interior(reference=self.root):
@@ -83,7 +83,7 @@ class BTree:
         return interior()
 
     def infix(self):
-        return self.infix_string().strip().split(' ')
+        return self.infix_list()
 
     def infix_list(self):
         def interior(reference=self.root):
@@ -94,14 +94,14 @@ class BTree:
         return interior()
 
     def postfix(self):
-        return self.postfix_string().strip().split(' ')
+        return self.postfix_list()
 
     def postfix_list(self):
         def interior(reference=self.root):
             if reference is None:
                 return []
             else:
-                return [] + interior(reference.left) + ' ' + interior(reference.right) + [reference.value]
+                return [] + interior(reference.left) + interior(reference.right) + [reference.value]
         return interior()
 
     def contains(self, element):
@@ -122,7 +122,7 @@ class BTree:
         return self.infix_string()
 
     def __repr__(self):
-        return 'BTree({}{})'.format(str(self.kind), ', ' + str(self.infix_list())[1:-1] if len(self) else '')
+        return 'BTree({}{})'.format(str(self.kind).split("'")[1], ', ' + str(self.infix_list())[1:-1] if len(self) else '')
 
     def __iter__(self):
         return iter(self.prefix_string())
