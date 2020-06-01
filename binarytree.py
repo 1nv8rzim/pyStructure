@@ -5,10 +5,10 @@ class Node:
         self.left = left
 
     def __str__(self):
-        return f'Node({self.value}, {self.rest})'
+        return f'Node({self.value}, {self.value}, {self.right})'
 
     def __repr__(self):
-        return f'Node({self.value}, {self.rest})'
+        return f'Node({self.value}, {self.left}, {self.right})'
 
 
 class BTree:
