@@ -64,10 +64,10 @@ class BTree:
         elif reference.value == element:
             self.size -= 1
             if reference.right is None:
-                self.temp_left = reference.left
+                self.temp_tree = reference.left
                 reference = reference.right
             else:
-                self.temp_right = reference.right
+                self.temp_tree = reference.right
                 reference = reference.left
         return reference
 
