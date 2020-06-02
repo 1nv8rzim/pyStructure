@@ -5,7 +5,7 @@ class Node:
         self.left = left
 
     def __str__(self):
-        return f'Node({self.value}, {self.value}, {self.right})'
+        return f'Node({self.value}, {self.left}, {self.right})'
 
     def __repr__(self):
         return f'Node({self.value}, {self.left}, {self.right})'
@@ -52,7 +52,7 @@ class BTree:
             temp_tree.root = self.temp_tree
             self.temp_tree = None
             for node in temp_tree:
-                self.adder(node, self.root, False)
+                self.root = self.adder(node, self.root, False)
 
     def remover(self, element, reference):
         if reference is None:
