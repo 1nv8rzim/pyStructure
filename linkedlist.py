@@ -60,3 +60,14 @@ class LList:
         if reference is None:
             raise IndexError()
         return self.remover(index - 1, reference.rest)
+
+    def __str__(self):
+        reference = self.root
+        temp = []
+        while reference is not None:
+            temp.append(reference.value)
+            reference = reference.rest
+        return str(temp)
+
+    def __repr__(self):
+        return 'LList({})'.format(str(self)[1:-1])
