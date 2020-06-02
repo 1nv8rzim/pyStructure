@@ -8,3 +8,11 @@ class Node:
 
     def __repr__(self):
         return str(self)
+
+
+class LList:
+    def __init__(self, *args):
+        self.root = None
+        self.size = 0
+        for arg in args:
+            self.add(arg)
