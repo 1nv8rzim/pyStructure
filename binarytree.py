@@ -131,7 +131,9 @@ class BTree:
         return self.size
 
     def __eq__(self, element):
-        if isinstance(element, self.kind):
+        if not isinstance(element, BTree):
+            return False
+        if not element.kind == self.kind:
             return False
         elif len(element) != len(self):
             return False
