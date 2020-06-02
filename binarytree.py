@@ -48,10 +48,10 @@ class BTree:
             raise TypeError(f'{element} is not of type {self.kind}')
         self.root = self.remover(element, self.root)
         if not self.temp_tree is None:
-            temp_tree = BTree(self.kind)
-            temp_tree.root = self.temp_tree
+            temp = BTree(self.kind)
+            temp.root = self.temp_tree
             self.temp_tree = None
-            for node in temp_tree:
+            for node in temp:
                 self.root = self.adder(node, self.root, False)
 
     def remover(self, element, reference):
@@ -65,10 +65,10 @@ class BTree:
             self.size -= 1
             if reference.right is None:
                 self.temp_left = reference.left
-                reference.left = None
+                reference = reference.right
             else:
                 self.temp_right = reference.right
-                reference.right = None
+                reference = reference.left
         return reference
 
     def prefix(self):
