@@ -40,3 +40,23 @@ class LList:
 
     def __len__(self):
         return self.size
+
+    def remove(self, index=0):
+        if not index:
+            if self.root is None:
+                raise IndexError('Cannot remove index that does not exist')
+            self.root = self.root.rest
+        else:
+            self.root = self.remover(index, self.root)
+
+    def remover(self, index, reference):
+        if index < 0:
+            raise IndexError()
+        if not index:
+            if reference is None:
+                raise IndexError()
+            self.size -= 1
+            return reference.rest
+        if reference is None:
+            raise IndexError()
+        return self.remover(index - 1, reference.rest)
