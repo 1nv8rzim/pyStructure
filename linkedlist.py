@@ -86,4 +86,15 @@ class LList:
             reference = reference.rest
         return iter(temp)
 
-    def
+    def __eq__(self, element):
+        if not isinstance(element, LList):
+            return False
+        if len(element) != len(self):
+            return False
+        for i, j in zip(self, element):
+            if i != j:
+                return False
+        return True
+
+    def __ne__(self, element):
+        return not self == element
