@@ -71,3 +71,19 @@ class LList:
 
     def __repr__(self):
         return 'LList({})'.format(str(self)[1:-1])
+
+    def contains(self, element):
+        for i in self:
+            if self == element:
+                return True
+        return False
+
+    def __iter__(self):
+        reference = self.root
+        temp = []
+        while reference is not None:
+            temp.append(reference.value)
+            reference = reference.rest
+        return iter(temp)
+
+    def
