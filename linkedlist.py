@@ -98,3 +98,12 @@ class LList:
 
     def __ne__(self, element):
         return not self == element
+
+    def copy(self):
+        temp_list = []
+        for i in self:
+            temp_list.append(i)
+        temp_LList = LList()
+        for i in reversed(temp_list):
+            temp_LList.add(i)
+        return temp_LList
