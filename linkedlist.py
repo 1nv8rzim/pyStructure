@@ -107,3 +107,15 @@ class LList:
         for i in reversed(temp_list):
             temp_LList.add(i)
         return temp_LList
+
+    def __add__(self, element):
+        clone = self.copy()
+        if hasattr(element, '__iter__'):
+            for i in element:
+                clone.add(i)
+        else:
+            clone.add(element)
+        return clone
+
+    def __getitem__(self, position):
+        return [element for element in self][position]
