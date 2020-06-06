@@ -1,3 +1,8 @@
+"""
+Name: Maxwell Fusco
+Language: python 3.8
+Description: defines a linked list in python 
+"""
 class Node:
     def __init__(self, value, rest):
         self.value = value
