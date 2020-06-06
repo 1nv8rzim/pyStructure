@@ -1,3 +1,8 @@
+"""
+Author: Maxwell Fusco
+Language: Python 3.8
+Description: Structure of a LinkedList in Python
+"""
 class Node:
     def __init__(self, value, right, left):
         self.value = value
